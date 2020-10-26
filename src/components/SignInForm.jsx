@@ -1,10 +1,11 @@
 import React from 'react';
+import { useHistory } from "react-router-native";
 import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
 import Text from './Text';
 import FormikTextInput from './FormikTextInput';
 import { Formik } from 'formik';
-import theme from '../theme';
 import * as yup from 'yup';
+import useSignIn from '../hooks/useSignIn';
 
 const styles = StyleSheet.create({
   container: {
@@ -29,7 +30,7 @@ const styles = StyleSheet.create({
   loginButton: {
     alignItems: 'center',
     borderRadius: 5 ,
-    backgroundColor: theme.colors.primary,
+    backgroundColor: 'blue',
     color: 'white',
     margin: 15,
   },
@@ -51,25 +52,47 @@ const initialValues = {
   password: '',
 };
 
-const SignIn = () => {
+
+const SignInForm = () => {
+  // eslint-disable-next-line no-unused-vars
+  const [signIn, result] = useSignIn();
+
+  let history = useHistory();
+
+  const onSubmit = async (values) => {
+    //values = {username:'kalle', password:'password'};
+    const { username, password } = values;
+
+    try {
+      const { data } = await signIn({ username, password });
+      console.log(data);
+      history.push('/');
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+
   return (
     <View style={styles.container}>
       <Formik 
           initialValues={initialValues} 
-          onSubmit={console.log('moro')}
+          onSubmit={onSubmit}
           validationSchema={validationSchema}>
-        <View>
-          <FormikTextInput  style={styles} name={"username"} placeholder={"Enter username"} />
-          <FormikTextInput style={styles} secureTextEntry={true}  name="password" placeholder="Enter password" />
-          <TouchableWithoutFeedback onPress={console.log('Logged in!')}>
-            <View style={styles.loginButton}>
-            <Text style={styles.loginButton}>Sign in</Text>
-            </View>
-          </TouchableWithoutFeedback>
-        </View>
+        {({handleSubmit}) => 
+          <View >
+            <FormikTextInput  style={styles} name={"username"} placeholder={"Enter username"} />
+            <FormikTextInput style={styles} secureTextEntry={true}  name="password" placeholder="Enter password" />
+            <TouchableWithoutFeedback  onPressIn={handleSubmit}>
+              <View style={styles.loginButton}>
+                <Text style={styles.loginButton}>Sign in</Text>
+              </View>
+            </TouchableWithoutFeedback>
+          </View> 
+        }
       </Formik>
     </View>
   );
 };
 
-export default SignIn;
+export default SignInForm;

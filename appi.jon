@@ -1,0 +1,16 @@
+{
+  "expo": {
+   "name": "Rate repository app",
+   "icon": "./path/to/your/app-icon.png",
+   "version": "1.0.0",
+   "slug": "https://github.com/Il-c/rate-repository-app.git",
+   "ios": {
+     "bundleIdentifier": "com.ilari.repApp",
+     "buildNumber": "1.0.0"
+   },
+   "android": {
+     "package": "com.ilari.repApp",
+     "versionCode": 1
+   }
+  }
+}

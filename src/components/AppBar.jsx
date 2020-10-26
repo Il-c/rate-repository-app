@@ -5,6 +5,9 @@ import Text from './Text';
 import theme from '../theme';
 import { Link } from "react-router-native";
 
+import LoginControl from '../components/LoginControl';
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -25,13 +28,11 @@ const AppBar = () => {
     <View style={styles.container}>
       <ScrollView  horizontal={true}>
 
-        <Link to="/" component={TouchableWithoutFeedback} >
+        <Link to="/"  component={TouchableWithoutFeedback} >
           <Text style={styles.text}>{'Repositories'}</Text>
         </Link>
-        
-        <Link to="/login" component={TouchableWithoutFeedback} >
-          <Text style={styles.text}>{'Sign in'}</Text>
-        </Link>
+
+        <LoginControl/>
 
       </ScrollView>
     </View>

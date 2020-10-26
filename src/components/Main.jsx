@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import { Route, Switch } from 'react-router-native';
 import RepositoryList from './RepositoryList';
 import AppBar from './AppBar';
-import SignIn from './SignIn';
+import SignInForm from './SignInForm';
 
 const styles = StyleSheet.create({
   flexContainer: {
@@ -25,7 +25,7 @@ const Main = () => {
       <AppBar />
       <Switch>
         <Route path="/login" exact>
-          <SignIn/>
+          <SignInForm/>
         </Route>
         
         <Route path="/" exact>
